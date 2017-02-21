@@ -23,17 +23,15 @@ public class Woorden
     public void pakInput(String input)
     {
         input = input.toLowerCase();
-        woorden = input.split("[^a-zA-Z]+");
-        
+        input = input.replaceAll("é","e");
+        woorden = input.split("[^a-zA-Z]+");        
     }
     
     public String aantal()
     {
-        int count = 0;
         Set<String> uniqueWoorden= new HashSet<String>();
         for(String s : woorden)
         {
-            count++;
             uniqueWoorden.add(s);
         }   
         return "Aantal woorden: " + woorden.length + "\nAantal unique woorden: " +  uniqueWoorden.size();
@@ -88,5 +86,6 @@ public class Woorden
             }
         }
         return concordatie.toString();
-    }
+    }    
+    
 }
