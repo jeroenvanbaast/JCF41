@@ -70,26 +70,33 @@ public class WoordenController implements Initializable {
     
     @FXML
     private void aantalAction(ActionEvent event) {
-        woorden.pakInput(taInput.getText());
-        taOutput.setText(woorden.aantal());
+        TestPreformance test = new TestPreformance(1000000);
+        test.preformenceTestAantal();
+        //woorden.pakInput(taInput.getText());
+        //taOutput.setText(woorden.aantal());
     }
 
     @FXML
     private void sorteerAction(ActionEvent event) {
-        woorden.pakInput(taInput.getText());
-        taOutput.setText(woorden.sorteer());
+        TestPreformance test = new TestPreformance(1000000);
+        test.preformenceTestSorteer();
+        //woorden.pakInput(taInput.getText());
+        //taOutput.setText(woorden.sorteer());
     }
 
     @FXML
     private void frequentieAction(ActionEvent event) {
-        woorden.pakInput(taInput.getText());
-        taOutput.setText(woorden.frequentie());
+        TestPreformance test = new TestPreformance(1000000);
+        test.preformenceTestFrequentie();
+        //woorden.pakInput(taInput.getText());
+        // taOutput.setText(woorden.frequentie());
     }
 
     @FXML
     private void concordatieAction(ActionEvent event) {
         TestPreformance test = new TestPreformance(1000000);
-        taOutput.setText(woorden.concordatie(taInput.getText())); 
+        test.preformenceTestConcordatie();
+        //taOutput.setText(woorden.concordatie(taInput.getText())); 
     }
     
     

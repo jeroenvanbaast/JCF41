@@ -7,6 +7,7 @@ package woordenapplicatie;
 
 import java.util.Arrays;
 import java.util.Random;
+import timeutil.TimeStamp;
 
 /**
  *
@@ -16,32 +17,46 @@ public class TestPreformance
 {
     private Woorden w = new Woorden();
     private int nummer;
+    TimeStamp ts;
     
     public TestPreformance(int Nr)
     {
+        ts = new TimeStamp();
         nummer = Nr;
     }
     public void preformenceTestConcordatie()
     {
+        ts.setBegin("Start concordatie");        
         w.concordatie(generateRandomWords(nummer));
+        ts.setEnd("einde");
+        System.out.println(ts);
     }  
     
     public void preformenceTestAantal()
     {
         w.pakInput(generateRandomWords(nummer));
+        ts.setBegin("Start aantal");
         w.aantal();
+        ts.setEnd("einde");
+        System.out.println(ts);
     }
     
     public void preformenceTestSorteer()
     {
         w.pakInput(generateRandomWords(nummer));
+        ts.setBegin("Start sorteer");
         w.sorteer();
+        ts.setEnd("einde");
+        System.out.println(ts);
     }
     
     public void preformenceTestFrequentie()
     {
         w.pakInput(generateRandomWords(nummer));
+        ts.setBegin("Start frequentie");
         w.frequentie();
+        ts.setEnd("einde");
+        System.out.println(ts);
     }
     
     // random wordt generator
