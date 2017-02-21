@@ -16,11 +16,21 @@ public class compere implements Comparator<String>
 {
     Map<String, Integer> map;
 
+    /**
+     * 
+     * @param map De map die gesorteerd moet worden
+     */    
     public compere(Map<String, Integer> map) {
         this.map = map;
     }
 
-
+    /**
+     * Override de compare methoden om het te sorteren op de Value inplaats van de Key
+     * Dit door de Value op te halen bij de bepaalde Key en deze te vergelijke
+     * @param o1 Key een
+     * @param o2 Key twee
+     * @return 
+     */
     @Override
     public int compare(String o1, String o2) {
         if(map.get(o1) >= map.get(o2)){
