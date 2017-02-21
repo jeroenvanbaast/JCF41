@@ -69,7 +69,7 @@ public class Woorden
     
     public String concordatie(String input)
     {
-        TreeMap<String,Set<Integer>> concordatie = new TreeMap<String,Set<Integer>>();
+        HashMap<String,Set<Integer>> concordatie = new HashMap();
         input = input.toLowerCase();
         String[]regels = input.split("\n");
         int regelNummer = 0;
@@ -80,9 +80,13 @@ public class Woorden
             {
                 if(!concordatie.containsKey(Woord))
                 {
-                   concordatie.put(Woord, new HashSet<Integer>());
+                   HashSet<Integer> test = new HashSet();
+                   test.add(regelNummer);
+                   concordatie.put(Woord, test);                   
                 }   
+                else{
                 concordatie.get(Woord).add(regelNummer);
+                }
             }
         }
         return concordatie.toString();
