@@ -107,11 +107,12 @@ public class Woorden
     {
         HashMap<String,Set<Integer>> concordatie = new HashMap();
         input = input.toLowerCase();
-        String[]regels = input.split("\n");
+        String[]regels = input.split("\n+");
         int regelNummer = 0;
         // Gaat regel voor regel door de input heen
         for(String Regel : regels)
         {
+            Regel = Regel.replaceAll("é","e");
             regelNummer++;
         // Gaat woord voor woord door de regel heen
             for(String Woord: Regel.split("[^a-zA-Z]+"))

@@ -108,34 +108,29 @@ public class WoordenTest
     @Test
     public void concordatie()
     {
-        TreeMap<String,Set<Integer>> concordatie = new TreeMap<String,Set<Integer>>();
-        concordatie.put("drie", new HashSet<Integer>());
-        concordatie.get("drie").add(1);
-        concordatie.get("drie").add(3);
+        HashMap<String,Set<Integer>> concordatie = new HashMap<String,Set<Integer>>();
         concordatie.put("een", new HashSet<Integer>());
         concordatie.get("een").add(1);
         concordatie.get("een").add(3);
-        concordatie.put("hoedje", new HashSet<Integer>());
-        concordatie.get("hoedje").add(2);
-        concordatie.get("hoedje").add(4);
-        concordatie.put("papier", new HashSet<Integer>());
-        concordatie.get("papier").add(4);
         concordatie.put("twee", new HashSet<Integer>());
         concordatie.get("twee").add(1);
         concordatie.get("twee").add(3);
-        concordatie.put("van", new HashSet<Integer>());
-        concordatie.get("van").add(2);
-        concordatie.get("van").add(4);
+        concordatie.put("drie", new HashSet<Integer>());
+        concordatie.get("drie").add(1);
+        concordatie.get("drie").add(3);       
         concordatie.put("vier", new HashSet<Integer>());
         concordatie.get("vier").add(1);
         concordatie.get("vier").add(3);
+        concordatie.put("hoedje", new HashSet<Integer>());
+        concordatie.get("hoedje").add(2);
+        concordatie.get("hoedje").add(4);
+        concordatie.put("van", new HashSet<Integer>());
+        concordatie.get("van").add(2);
+        concordatie.get("van").add(4);
+        concordatie.put("papier", new HashSet<Integer>());
+        concordatie.get("papier").add(4);   
         String verwacht = concordatie.toString();
         assertEquals(verwacht,w.concordatie(input));
     }
-    
-    
-    
-    
-    
     
 }
