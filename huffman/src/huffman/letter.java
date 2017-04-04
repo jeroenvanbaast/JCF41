@@ -5,11 +5,13 @@
  */
 package huffman;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Jeroen
  */
-public class letter {
+public class letter implements Serializable{
     
     private String character;
     private int frequency;

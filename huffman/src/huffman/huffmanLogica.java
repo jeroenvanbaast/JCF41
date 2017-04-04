@@ -5,11 +5,15 @@
  */
 package huffman;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,17 +24,25 @@ public class huffmanLogica {
     private String input;
     private List<letter> letters;
     private PriorityQueue priority;
+    private HashMap<String,String> leafs;
+    private bestandmaken bestand;
     
     public huffmanLogica(String input)
     {
+        leafs = new HashMap();
         this.input = input;
+        bestand = new bestandmaken();
+        maakHufcode();
+        bestandmaken();
+        bestanduitlezen();
+    }
+    
+    public void maakHufcode()
+    {
         frequency();
-        System.out.println(letters);
         sorteerOpFrequency();
-        System.out.println(priority);
-        //maakBoom();
-        //System.out.println(priority.peek());
-        //doorloopBoom((letter)priority.peek());
+        maakBoom();
+        doorloopBoom((letter)priority.peek(),"");
     }
     
     public void frequency()
@@ -74,22 +86,80 @@ public class huffmanLogica {
         }        
     }
     
-    public void doorloopBoom(letter letter)
+    public void doorloopBoom(letter letter,String code)
     {
         if(letter.getLeftLetter() != null)
         {
-            System.out.println(letter);
-            doorloopBoom(letter.getLeftLetter());
+        //    System.out.println(letter);
+            doorloopBoom(letter.getLeftLetter(),code + "0");
         }
         if(letter.getRightLetter() != null)
         {
-            System.out.println(letter);
-            doorloopBoom(letter.getRightLetter());
+        //    System.out.println(letter);
+            doorloopBoom(letter.getRightLetter(), code + "1");
         }
         if(letter.getLeftLetter() == null && letter.getRightLetter() == null)
         {
-            System.out.println(letter);
-            // done
+            leafs.put(letter.getCharacter(), code);
+        //    System.out.println(letter);
         }
     }
+    
+    public String makeCode()
+    {
+        StringBuilder builder = new StringBuilder();
+        for(int i = 0; i <input.length(); i++)
+        {
+            char c = input.charAt(i);
+            builder.append(leafs.get(String.valueOf(c)));
+        }            
+        return builder.toString();
+    }
+    
+    public void bestandmaken()
+    {
+        try {
+            bestand.saveHuffTree((letter)priority.peek());
+            bestand.saveCode(makeCode());
+            bestand.saveDefaultText(input);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(huffmanLogica.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(huffmanLogica.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+    }
+    
+    public void bestanduitlezen()
+    {
+        try {
+            letter boom = bestand.getHuffTree();
+            String code = bestand.getEncodedText();
+            decode(boom,code);            
+        } catch (IOException ex) {
+            Logger.getLogger(huffmanLogica.class.getName()).log(Level.SEVERE, null, ex);
+        }                   
+    }
+    
+    public void decode(letter boom, String code)
+    {
+        StringBuilder builder = new StringBuilder();
+        letter base = boom;
+        for (int i = 0; i < code.length(); i++) {
+            if (code.charAt(i) == '1') {
+                base = base.getRightLetter();
+            } else if (code.charAt(i) == '0') {
+                base = base.getLeftLetter();
+            }
+            if (base.getLeftLetter() == null && base.getRightLetter() == null) {
+                builder.append(base.getCharacter());
+                base = boom;
+            }
+        }   
+        System.out.println(builder.toString());
+    }
+    
+    
+    
+    
+    
 }
