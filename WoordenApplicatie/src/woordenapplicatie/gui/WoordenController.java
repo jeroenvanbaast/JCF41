@@ -18,7 +18,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import woordenapplicatie.TestPreformance;
 import woordenapplicatie.Woorden;
 
 /**
@@ -70,33 +69,25 @@ public class WoordenController implements Initializable {
     
     @FXML
     private void aantalAction(ActionEvent event) {
-        TestPreformance test = new TestPreformance(1000000);
-        test.preformenceTestAantal();
-        //woorden.pakInput(taInput.getText());
-        //taOutput.setText(woorden.aantal());
+        woorden.pakInput(taInput.getText());
+        taOutput.setText(woorden.aantal());
     }
 
     @FXML
     private void sorteerAction(ActionEvent event) {
-        TestPreformance test = new TestPreformance(1000000);
-        test.preformenceTestSorteer();
-        //woorden.pakInput(taInput.getText());
-        //taOutput.setText(woorden.sorteer());
+        woorden.pakInput(taInput.getText());
+        taOutput.setText(woorden.sorteer());
     }
 
     @FXML
     private void frequentieAction(ActionEvent event) {
-        TestPreformance test = new TestPreformance(1000000);
-        test.preformenceTestFrequentie();
-        //woorden.pakInput(taInput.getText());
-        // taOutput.setText(woorden.frequentie());
+        woorden.pakInput(taInput.getText());
+        taOutput.setText(woorden.frequentie());
     }
 
     @FXML
     private void concordatieAction(ActionEvent event) {
-        TestPreformance test = new TestPreformance(1000000);
-        test.preformenceTestConcordatie();
-        //taOutput.setText(woorden.concordatie(taInput.getText())); 
+        taOutput.setText(woorden.concordatie(taInput.getText())); 
     }
     
     

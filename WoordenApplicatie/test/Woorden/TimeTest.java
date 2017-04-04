@@ -3,34 +3,60 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package woordenapplicatie;
+package Woorden;
 
 import java.util.Arrays;
 import java.util.Random;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
 import timeutil.TimeStamp;
+import woordenapplicatie.Woorden;
 
 /**
- * Class om de tijd te meten voor de functies in de Woorden classe
+ *
  * @author jeroen
  */
-public class TestPreformance
+public class TimeTest
 {
     private Woorden w = new Woorden();
-    private int nummer;
-    TimeStamp ts;
+    private int nummer = 100000;
+    private TimeStamp ts;
     
-    /**
-     * 
-     * @param Nr het nummer van woorden dat moet worden gegenereerd
-     */
-    public TestPreformance(int Nr)
+    public TimeTest()
+    {
+    }
+    
+    @BeforeClass
+    public static void setUpClass()
+    {
+    }
+    
+    @AfterClass
+    public static void tearDownClass()
+    {
+    }
+    
+    @Before
+    public void setUp()
     {
         ts = new TimeStamp();
-        nummer = Nr;
     }
-    /**
-     * Meet de tijd voor de concordatie methoden
-     */
+    
+    @After
+    public void tearDown()
+    {
+    }
+
+    // TODO add test methods here.
+    // The methods must be annotated with annotation @Test. For example:
+    //
+    // @Test
+    // public void hello() {}
+    @Test
     public void preformenceTestConcordatie()
     {
         ts.setBegin("Start concordatie");        
@@ -40,8 +66,9 @@ public class TestPreformance
     }  
     
     /**
-     * Meet de tijd voor de aantal methoden
+     * 
      */
+    @Test
     public void preformenceTestAantal()
     {
         w.pakInput(generateRandomWords(nummer));
@@ -54,6 +81,7 @@ public class TestPreformance
     /**
      * Meet de tijd voor de sorteer methoden
      */
+    @Test
     public void preformenceTestSorteer()
     {
         w.pakInput(generateRandomWords(nummer));
@@ -66,6 +94,7 @@ public class TestPreformance
     /** 
      * meet de tijd voor de frequentie methoden
      */
+    @Test
     public void preformenceTestFrequentie()
     {
         w.pakInput(generateRandomWords(nummer));
@@ -75,11 +104,6 @@ public class TestPreformance
         System.out.println(ts);
     }
     
-    /**
-     * Genereerd random woorden
-     * @param numberOfWords het nummer van worden die gegenereerd moeten worden
-     * @return de gegenereerde woorden
-     */
     public String generateRandomWords(int numberOfWords) {
         String[] randomStrings = new String[numberOfWords];
         Random random = new Random();
