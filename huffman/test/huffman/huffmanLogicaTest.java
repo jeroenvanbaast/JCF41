@@ -124,18 +124,18 @@ public class huffmanLogicaTest
         huffmanLogica h = new huffmanLogica(input);
         h.maakHufcode();
         HashMap<String,String> leafs = new HashMap();
-        leafs.put(" ","110");
-        leafs.put("a","000");
-        leafs.put("r","010");
-        leafs.put("s","0110");
-        leafs.put("e","10");
-        leafs.put("E","11101");
-        leafs.put("i","11110");
-        leafs.put("y","11111");
-        leafs.put("k","0011");
-        leafs.put("l","11100");
-        leafs.put(".","0010");
-        leafs.put("n","0111");
+        leafs.put(" ","001");
+        leafs.put("a","111");
+        leafs.put("r","101");
+        leafs.put("s","1001");
+        leafs.put("E","00010");
+        leafs.put("e","01");
+        leafs.put("y","00000");
+        leafs.put("i","00001");
+        leafs.put("k","1100");
+        leafs.put("l","00011");
+        leafs.put("n","1000");
+        leafs.put(".","1101");
         assertEquals(leafs.toString(),h.getLeafs().toString());
     }
 
@@ -147,7 +147,7 @@ public class huffmanLogicaTest
     {
         String input = "Eerie eyes seen near lake.";
         huffmanLogica h = new huffmanLogica(input);
-        String test = "111011001011110101101011111100110110011010100111110011110000010110111000000011100010";
+        String test = "000100110100001010010100000011001001100101011000001100001111101001000111111100011101";
         assertEquals(test,h.makeCode());
     }
 
@@ -161,12 +161,16 @@ public class huffmanLogicaTest
         huffmanLogica h = new huffmanLogica(input);
         letter test = (letter) h.getPriority().peek();
         String testString = "Eerie eyes seen near lake.";
-        assertEquals(testString,h.decode(test, "111011001011110101101011111100110110011010100111110011110000010110111000000011100010"));
+        assertEquals(testString,h.decode(test, "000100110100001010010100000011001001100101011000001100001111101001000111111100011101"));
     } 
     
      @Test
-    public void testAllExceptions(){
-        
+    public void testEend(){
+        String input = "eend";
+        huffmanLogica h = new huffmanLogica(input);
+        letter test = (letter) h.getPriority().peek();
+        String uitkomst = "eend";
+        assertEquals(uitkomst,h.decode(test, "001110"));
     }
     
 }

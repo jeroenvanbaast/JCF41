@@ -26,27 +26,23 @@ public class huffmanLogica {
     private PriorityQueue priority;
     private HashMap<String,String> leafs;
     private bestandmaken bestand;
+    private TimeStamp ts2;
+    private TimeStamp ts;
     
     public huffmanLogica(String input)
     {
         leafs = new HashMap();
         this.input = input;
         bestand = new bestandmaken();
-        TimeStamp ts = new TimeStamp();
-        TimeStamp ts2 = new TimeStamp();
-        TimeStamp ts3 = new TimeStamp();
-        ts.setBegin("begin code maken");
+        ts = new TimeStamp();
+        ts2 = new TimeStamp();
+        ts.setBegin("begin");
         maakHufcode();
         ts.setEnd("einde code maken");
-        System.out.println(ts);
-        ts2.setBegin("begin bestand maken");
-        bestandmaken();
-        ts2.setEnd("einde bestand maken");
-        System.out.println(ts2);
-        ts3.setBegin("begin bestand uitlezen");
+        bestandmaken();        
         bestanduitlezen();
-        ts3.setEnd("einde bestand uitlezen");
-        System.out.println(ts3);
+        System.out.println(ts);
+        System.out.println(ts2);
     }
     
     public void maakHufcode()
@@ -55,6 +51,7 @@ public class huffmanLogica {
         sorteerOpFrequency();
         maakBoom();
         doorloopBoom((letter)priority.peek(),"");
+        System.out.println(leafs);
     }
     
     public void frequency()
@@ -92,8 +89,8 @@ public class huffmanLogica {
     {
         while(priority.size() > 1)
         {
-        letter left = (letter) priority.poll();
         letter right = (letter) priority.poll();
+        letter left = (letter) priority.poll();
         letter newLetter = new letter(left.getFrequency() + right.getFrequency(),left,right);
         priority.add(newLetter);
         }        
@@ -126,6 +123,7 @@ public class huffmanLogica {
             char c = input.charAt(i);
             builder.append(leafs.get(String.valueOf(c)));
         }            
+        System.out.println(builder);
         return builder.toString();
     }
     
@@ -155,6 +153,7 @@ public class huffmanLogica {
     
     public String decode(letter boom, String code)
     {
+        ts2.setBegin("begin");
         StringBuilder builder = new StringBuilder();
         letter base = boom;
         for (int i = 0; i < code.length(); i++) {
@@ -168,6 +167,7 @@ public class huffmanLogica {
                 base = boom;
             }
         }   
+        ts2.setEnd("einde decode");
         return builder.toString();        
     }
 

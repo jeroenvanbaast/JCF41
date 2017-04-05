@@ -25,7 +25,7 @@ public class Huffman {
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
         String input = "Eerie eyes seen near lake.";
-        huffmanLogica h = new huffmanLogica(wonderland());
+        huffmanLogica h = new huffmanLogica(input);
     }
     
     public static String wonderland() throws FileNotFoundException, IOException {
