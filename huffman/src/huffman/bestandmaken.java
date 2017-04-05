@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.BitSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,66 +24,106 @@ import java.util.logging.Logger;
  *
  * @author Jeroen
  */
-public class bestandmaken {
-    
+public class bestandmaken
+{
+
     private FileInputStream fis;
     private ObjectInputStream ois;
     private FileOutputStream fos;
     private ObjectOutputStream oos;
     private letter letter;
 
-    public bestandmaken() {
+    public bestandmaken()
+    {
     }
 
-    public void saveCode(String HuffCode) throws FileNotFoundException {
+    public void saveCode(String huffcode) throws FileNotFoundException, IOException
+    {
+        BitSet bits = new BitSet();
+        for (int i = 0; i < huffcode.length(); i++)
+        {
+            Character c = huffcode.charAt(i);
+            boolean bool = false;
+            switch (c)
+            {
+                case '1':
+                    bool = true;
+                    break;
+                case '0':
+                    bool = false;
+                    break;
+            }
+            bits.set(i, bool);
+        }
         fos = new FileOutputStream("huffCodeText.bin");
-        PrintWriter out = new PrintWriter(fos);
-        out.println(HuffCode);
-        out.flush();
+        oos = new ObjectOutputStream(fos);
+        oos.writeObject(bits);
+        oos.writeInt(huffcode.length());
+        oos.close();
     }
 
-    public void saveDefaultText(String text) throws FileNotFoundException {
+    public void saveDefaultText(String text) throws FileNotFoundException
+    {
         fos = new FileOutputStream("DefaultText.txt");
         PrintWriter out = new PrintWriter(fos);
         out.println(text);
         out.flush();
-
     }
 
-    public void saveHuffTree(letter letter) throws IOException {
+    public void saveHuffTree(letter letter) throws IOException
+    {
         fos = new FileOutputStream("letter.ser");
         oos = new ObjectOutputStream(fos);
         oos.writeObject(letter);
         oos.flush();
     }
 
-    public letter getHuffTree() throws IOException {
-        try {
+    public letter getHuffTree() throws IOException
+    {
+        try
+        {
             fis = new FileInputStream("letter.ser");
             ois = new ObjectInputStream(fis);
             letter = (letter) ois.readObject();
             ois.close();
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex)
+        {
             Logger.getLogger(bestandmaken.class.getName()).log(Level.SEVERE, null, ex);
         }
         return letter;
     }
 
-    
-    public String getEncodedText(){
-        String encodedText = "";
-        String currentLine;
-        try {
-            FileReader fr = new FileReader("huffCodeText.bin");
-            BufferedReader br = new BufferedReader(fr);
-            while ((currentLine = br.readLine()) != null) {
-                encodedText = encodedText + currentLine;
+    public String getEncodedText()
+    {
+        StringBuilder sb = new StringBuilder();
+        try
+        {
+            fis = new FileInputStream("huffCodeText.bin");
+            ois = new ObjectInputStream(fis);
+            BitSet set = (BitSet) ois.readObject();
+            int length = ois.readInt();
+            for (int i = 0; i < length; i++)
+            {
+                if (set.get(i))
+                {
+                    sb.append("1");
+                } else
+                {
+                    sb.append("0");
+                }
             }
-        } catch (FileNotFoundException ex) {
+        } catch (FileNotFoundException ex)
+        {
             Logger.getLogger(bestandmaken.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (IOException ex)
+        {
+            Logger.getLogger(bestandmaken.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex)
+        {
             Logger.getLogger(bestandmaken.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return encodedText;
+        return sb.toString();
+
     }
+
 }

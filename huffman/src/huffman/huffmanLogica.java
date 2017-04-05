@@ -7,13 +7,13 @@ package huffman;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import timeutil.TimeStamp;
 
 /**
  *
@@ -32,9 +32,21 @@ public class huffmanLogica {
         leafs = new HashMap();
         this.input = input;
         bestand = new bestandmaken();
+        TimeStamp ts = new TimeStamp();
+        TimeStamp ts2 = new TimeStamp();
+        TimeStamp ts3 = new TimeStamp();
+        ts.setBegin("begin code maken");
         maakHufcode();
+        ts.setEnd("einde code maken");
+        System.out.println(ts);
+        ts2.setBegin("begin bestand maken");
         bestandmaken();
+        ts2.setEnd("einde bestand maken");
+        System.out.println(ts2);
+        ts3.setBegin("begin bestand uitlezen");
         bestanduitlezen();
+        ts3.setEnd("einde bestand uitlezen");
+        System.out.println(ts3);
     }
     
     public void maakHufcode()
@@ -135,7 +147,7 @@ public class huffmanLogica {
         try {
             letter boom = bestand.getHuffTree();
             String code = bestand.getEncodedText();
-            decode(boom,code);            
+            String resultaat = decode(boom,code);            
         } catch (IOException ex) {
             Logger.getLogger(huffmanLogica.class.getName()).log(Level.SEVERE, null, ex);
         }                   
@@ -156,13 +168,7 @@ public class huffmanLogica {
                 base = boom;
             }
         }   
-        System.out.println(builder.toString());
         return builder.toString();        
-    }
-
-    public String getInput()
-    {
-        return input;
     }
 
     public List<letter> getLetters()
@@ -178,11 +184,6 @@ public class huffmanLogica {
     public HashMap<String, String> getLeafs()
     {
         return leafs;
-    }
-
-    public bestandmaken getBestand()
-    {
-        return bestand;
     }
     
     

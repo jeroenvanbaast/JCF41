@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.Random;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -69,6 +70,8 @@ public class huffmanLogicaTest
         letters.add(new letter("l", 1));
         letters.add(new letter("n", 2));
         letters.add(new letter(".", 1));
+        System.out.println(letters.toString());
+        System.out.println(h.getLetters().toString());
         assertEquals(letters.toString(),h.getLetters().toString());
     }
 
@@ -94,7 +97,8 @@ public class huffmanLogicaTest
         priority.add(new letter("l", 1));
         priority.add(new letter("n", 2));
         priority.add(new letter(".", 1));
-        assertEquals(priority.toString(),h.getPriority().toString());
+        String test = h.getPriority().toString();
+        assertEquals(priority.toString(),test);
     }
 
     /**
@@ -158,6 +162,11 @@ public class huffmanLogicaTest
         letter test = (letter) h.getPriority().peek();
         String testString = "Eerie eyes seen near lake.";
         assertEquals(testString,h.decode(test, "111011001011110101101011111100110110011010100111110011110000010110111000000011100010"));
+    } 
+    
+     @Test
+    public void testAllExceptions(){
+        
     }
     
 }
