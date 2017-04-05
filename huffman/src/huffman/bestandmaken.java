@@ -23,8 +23,6 @@ import java.util.logging.Logger;
  */
 public class bestandmaken {
     
-    
-    private String input;
     private FileInputStream fis;
     private ObjectInputStream ois;
     private FileOutputStream fos;

@@ -73,6 +73,7 @@ public class huffmanLogica {
        {
            priority.add(l);
        }
+       
     }
     
     public void maakBoom()
@@ -140,7 +141,7 @@ public class huffmanLogica {
         }                   
     }
     
-    public void decode(letter boom, String code)
+    public String decode(letter boom, String code)
     {
         StringBuilder builder = new StringBuilder();
         letter base = boom;
@@ -156,6 +157,32 @@ public class huffmanLogica {
             }
         }   
         System.out.println(builder.toString());
+        return builder.toString();        
+    }
+
+    public String getInput()
+    {
+        return input;
+    }
+
+    public List<letter> getLetters()
+    {
+        return letters;
+    }
+
+    public PriorityQueue getPriority()
+    {
+        return priority;
+    }
+
+    public HashMap<String, String> getLeafs()
+    {
+        return leafs;
+    }
+
+    public bestandmaken getBestand()
+    {
+        return bestand;
     }
     
     
